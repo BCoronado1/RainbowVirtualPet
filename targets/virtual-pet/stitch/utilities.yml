@@ -1,0 +1,31 @@
+# Created October 22nd, 2013 (Javier Camara)
+#
+# Utility curves, defined as X:Y pairs, where X is value of the dimension and Y
+# is the utility in the range [0,1]
+#
+# History:
+# - [JC 2013.10.22] Created file, defined utilities for Dos Attack Demo.
+# - [JC 2013.11.1] Added user annoyance to the utility profile.
+model:
+  name: PetSys
+  type: Acme
+utilities:
+  uSF:
+    label: "Historical Strategy Failure"
+    mapping: "[EAvg]Strategy.rateFailure"
+    description: "Rate of failure, in fraction, of a strategy; utility has no effect if strategy history is not kept"
+    utility:
+      0: 1.00
+      0.1: 0.80
+      0.5: 0.01
+      1: 0.00
+
+# Weighted utility preferences, each set should sum to 1.
+# Currently there's only strategy failure utility dimension.
+weights:
+  scenario 1:
+    uSF: 1.0
+
+# Tactic quality attribute vectors
+# Currently there's only strategy failure quality attribute which isn't directly affected by selection of tactic.
+vectors: {}

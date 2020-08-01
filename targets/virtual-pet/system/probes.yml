@@ -1,0 +1,13 @@
+vars:
+  _probes.commonPath: "${rainbow.path}/system/probes"
+
+probes:
+  PetProbe:
+    alias: petprobe
+    location: "127.0.0.1"
+    type: java
+    javaInfo:
+      class: com.github.bcoronado1.rainbowvirtualpet.probes.PetProbe
+      period: 1000
+      args.length: 1
+      args.0: "127.0.0.1:6555"

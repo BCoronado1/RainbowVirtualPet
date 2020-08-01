@@ -1,0 +1,35 @@
+# Effectors for Swim
+vars:
+  _effectors.commonPath: "${rainbow.path}/system/effectors"
+
+effector-types:
+  zmq-request:
+    location: "127.0.0.1"
+    type: java
+    javaInfo:
+      class: "com.github.bcoronado1.rainbowvirtualpet.effectors.PetEffector"
+      args.length: 2
+      args.0: "127.0.0.1:6555"
+      args.1: ~
+
+effectors:
+  feed:
+    effector-type: zmq-request
+    command: "pet.feed()"
+    javaInfo:
+      args.length: 2
+      args.1: "feed"
+
+  rest:
+    effector-type: zmq-request
+    command: "pet.rest()"
+    javaInfo:
+      args.length: 2
+      args.1: "rest"
+
+  play:
+    effector-type: zmq-request
+    command: "pet.play()"
+    javaInfo:
+      args.length: 2
+      args.1: "play"

@@ -1,0 +1,26 @@
+Family PetFam = {
+
+    Component Type GenericComponentT = {
+        Property deploymentLocation : string <<  default : string = "127.0.0.1"; >> ;
+    }
+
+    Component Type PetT extends GenericComponentT with {
+        Property name : string <<  default : string = "UNDEFINED"; >> ;
+        Property hunger : float <<  default : float = -1.0; >> ;
+        Property fatigue : float <<  default : float = -1.0; >> ;
+        Property stress : float <<  default : float = -1.0; >> ;
+    }
+}
+
+System PetSys : PetFam = new PetFam extended with {
+
+    Component pet : PetT = new PetT extended with {}
+
+    Property MAX_HUNGER = 33.3;
+    Property MAX_FATIGUE = 33.3;
+    Property MAX_STRESS = 33.3;
+
+    rule petFed = invariant pet.hunger < MAX_HUNGER;
+    rule petRested = invariant pet.fatigue < MAX_FATIGUE;
+    rule petRelaxed = invariant pet.stress < MAX_STRESS;
+}

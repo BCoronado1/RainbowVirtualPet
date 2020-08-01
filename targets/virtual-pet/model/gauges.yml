@@ -1,0 +1,49 @@
+#
+# Gauge Type and Gauge Instance Specifications
+#  - time periods generally in milliseconds
+gauge-types:
+  PetGaugeT:
+    commands: {setHunger: PetT.setHunger(int), setFatigue: PetT.setFatigue(int), setStress: PetT.setStressint)}
+    setupParams:
+      targetIP: {type: String, default: "127.0.0.1"}
+      beaconPeriod: {type: long, default: 20000}
+      javaClass: {type: String, default: "com.github.bcoronado1.rainbowvirtualpet.gauges.PetGauge"}
+      regex: {type: String, default: ~}
+    configParams:
+      samplingFrequency: {type: long, default: 1000}
+      targetProbeType: {type: String, default: petprobe}
+    comment: "Pet gauge updates pet state values in the model."
+
+gauge-instances:
+
+  PetNameGauge:
+    type: PetGaugeT
+    model: "PetSys:Acme"
+    commands: {setName: pet.setName($<name>)}
+    setupValues: {regex: "name:.*"}
+    configValues: {}
+    comment: "Update pet name in the Acme model"
+
+  PetHungerGauge:
+    type: PetGaugeT
+    model: "PetSys:Acme"
+    commands: {setHunger: pet.setHunger($<hunger>)}
+    setupValues: {regex: "hunger:\d*\.?\d*"}
+    configValues: {}
+    comment: "Update pet hunger in the Acme model"
+
+  PetFatigueGauge:
+    type: PetGaugeT
+    model: "PetSys:Acme"
+    commands: {setFatigue: pet.setFatigue($<fatigue>)}
+    setupValues: {regex: "fatigue:\d*\.?\d*"}
+    configValues: {}
+    comment: "Update pet fatigue in the Acme model"
+
+  PetStressGauge:
+    type: PetGaugeT
+    model: "PetSys:Acme"
+    commands: {setStress: pet.setStress($<stress>)}
+    setupValues: {regex: "stress:\d*\.?\d*"}
+    configValues: {}
+    comment: "Update pet stress in the Acme model"
